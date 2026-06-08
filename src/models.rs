@@ -5,35 +5,35 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TabItem {
-  pub key: String,
-  pub title: String,
-  pub sf_symbol: String,
+    pub key: String,
+    pub title: String,
+    pub sf_symbol: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SetItemsRequest {
-  pub items: Vec<TabItem>,
-  #[serde(default)]
-  pub selected_index: usize,
+    pub items: Vec<TabItem>,
+    #[serde(default)]
+    pub selected_index: usize,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SetActiveTabRequest {
-  pub index: usize,
+    pub index: usize,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SetHiddenRequest {
-  pub hidden: bool,
+    pub hidden: bool,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SetBadgeRequest {
-  pub index: usize,
-  #[serde(default)]
-  pub value: Option<String>,
+    pub index: usize,
+    #[serde(default)]
+    pub value: Option<String>,
 }
