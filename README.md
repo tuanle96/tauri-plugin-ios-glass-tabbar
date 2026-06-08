@@ -1,5 +1,10 @@
 # tauri-plugin-ios-glass-tabbar
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-ios-glass-tabbar.svg)](https://crates.io/crates/tauri-plugin-ios-glass-tabbar)
+[![npm](https://img.shields.io/npm/v/tauri-plugin-ios-glass-tabbar-api.svg)](https://www.npmjs.com/package/tauri-plugin-ios-glass-tabbar-api)
+[![Test](https://github.com/tuanle96/tauri-plugin-ios-glass-tabbar/actions/workflows/test.yml/badge.svg)](https://github.com/tuanle96/tauri-plugin-ios-glass-tabbar/actions/workflows/test.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A **native iOS 26 "Liquid Glass" `UITabBar`** for [Tauri](https://tauri.app) apps, bridged to your
 web-side navigation.
 
