@@ -90,7 +90,26 @@ the bottom (default iOS 26 appearance = Liquid Glass), and uses Tauri's plugin `
 ## Requirements
 
 - iOS 13+ to run; **iOS 26 SDK (Xcode 26+)** for the Liquid Glass material.
-- Tauri v2.
+- Tauri v2 with the **iOS plugin Swift layer wired up** — i.e. your app actually compiles and
+  links Tauri plugins' Swift (the standard setup; how `addPluginListener` / `invoke('plugin:…')`
+  reach native code). This plugin is a normal Tauri `Plugin`, so it links the same way as any other.
+
+## Not linking? (apps without the Tauri Swift plugin layer)
+
+A few apps run a **minimal iOS setup** that only uses plugins' *Rust* side and never compiles any
+plugin Swift (no SwiftPM `packages:` in the xcodegen project, no generated `Package.swift`). There,
+this plugin won't link — `register_ios_plugin(init_plugin_ios_glass_tabbar)` resolves to a Swift
+`@_cdecl` symbol that was never built, so the app fails at link time.
+
+You don't need the plugin in that case — you can inject the same native `UITabBar` with a
+**self-contained `.mm` that does *not* `import Tauri`**: drop an Objective-C++ file into your app
+target's sources, find the key window + `WKWebView` at runtime (e.g. on
+`UIApplicationDidBecomeActiveNotification`), add a `UITabBar` pinned to the bottom, and bridge it
+yourself — native→web via `webView.evaluateJavaScript("window.__setTab('…')")`, web→native via a
+`WKScriptMessageHandler`. It's more boilerplate and no type-safety, but it has zero Tauri-Swift
+dependency. The plugin's [`GlassTabBarPlugin.swift`](ios/Sources/GlassTabBarPlugin.swift) is a good
+reference for the window/tab-bar wiring; just swap the Tauri `Invoke`/`trigger` calls for the raw
+JS bridge above.
 
 ## License
 
